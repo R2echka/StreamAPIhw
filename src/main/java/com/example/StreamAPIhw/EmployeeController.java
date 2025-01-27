@@ -1,5 +1,7 @@
 package com.example.StreamAPIhw;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +27,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path="/all")
-    public String getAllEmployees(@RequestParam(value="departmentId", required = false) Integer departmentId){
+    public List<Employee> getAllEmployees(@RequestParam(value="departmentId", required = false) Integer departmentId){
         if(departmentId != null){
             return employeeService.getEmployeesByDepartment(departmentId);
         } else {

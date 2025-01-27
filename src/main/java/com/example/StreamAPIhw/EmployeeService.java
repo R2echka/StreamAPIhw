@@ -20,17 +20,15 @@ public class EmployeeService {
     new Employee("name9", (byte) 5, 23820),
     new Employee("name10", (byte) 2, 28900));
 
-    public String getEmployeesByDepartment (int department){
+    public List<Employee> getEmployeesByDepartment (int department){
         return employees.stream()
         .filter(employee -> employee.getDepartment() == department)
-        .collect(Collectors.toList())
-        .toString();
+        .collect(Collectors.toList());
     };
 
-    public String getAllEmployees (){
+    public List<Employee> getAllEmployees (){
         return employees.stream()
-        .collect(Collectors.toList())
-        .toString();
+        .collect(Collectors.toList());
     };
 
     public int minSalaryEmployee (int department){
