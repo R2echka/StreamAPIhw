@@ -1,13 +1,14 @@
-package com.example.StreamAPIhw;
+package com.example.StreamAPIhw.model;
 
 public class Employee {
+
     private final int id;
     private static int counter;
     private final String fullName;
     private int department;
     private int salary;
 
-    public Employee(String name, int department, int salary){
+    public Employee(String name, int department, int salary) {
         this.id = counter;
         plusOne();
         this.fullName = name;
@@ -15,31 +16,31 @@ public class Employee {
         this.salary = salary;
     }
 
-    public final void plusOne(){
-        counter ++;
+    public final void plusOne() {
+        counter++;
     }
 
-    public int getId(){
+    public int getId() {
         return this.id;
     }
 
-    public String getName(){
+    public String getName() {
         return this.fullName;
     }
 
-    public int getDepartment(){
+    public int getDepartment() {
         return this.department;
     }
 
-    public int getSalary(){
+    public int getSalary() {
         return this.salary;
     }
 
-    public void setDepartment(int department){
+    public void setDepartment(int department) {
         this.department = department;
     }
 
-    public void setSalary(int salary){
+    public void setSalary(int salary) {
         this.salary = salary;
     }
 
