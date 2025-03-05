@@ -26,11 +26,19 @@ public class DepartmentService {
     }
     
     public int maxSalaryEmployee(int department) {
-        return this.employeeService.maxSalaryEmployee(department);
+        return this.employeeService.employees.stream()
+        .filter(e -> e.getDepartment() == department)
+        .mapToInt(Employee::getSalary)
+        .max()
+        .orElseThrow();
     }
 
     public int minSalaryEmployee(int department) {
-        return this.employeeService.minSalaryEmployee(department);
+        return this.employeeService.employees.stream()
+        .filter(e -> e.getDepartment() == department)
+        .mapToInt(Employee::getSalary)
+        .min()
+        .orElseThrow();
     }
 
     public Map<Integer, List<Employee>> getAllEmployeesGrouped() {

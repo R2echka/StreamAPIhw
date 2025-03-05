@@ -1,7 +1,6 @@
 package com.example.StreamAPIhw;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +30,25 @@ public class DepartmentServiceTest {
 
     @Test
     public void EmployeesByDepartment() {
+        final List<Employee> employees = List.of(
+            new Employee("name1", (byte) 3, 93200),
+            new Employee("name2", (byte) 3, 10),
+            new Employee("name3", 4, 1));
         Mockito.when(employeeService.getEmployeesByDepartment(-1)).thenReturn(new ArrayList<>());
+        Mockito.when(employeeService.getEmployeesByDepartment(3)).thenReturn(List.of(employees.get(0), employees.get(1)));
         assertTrue(departmentService.getEmployeesByDepartment(-1).isEmpty());
+        assertEquals(List.of(employees.get(0), employees.get(1)), departmentService.getEmployeesByDepartment(3));
     }
 
     @Test
     public void SalarySum() {
-        Mockito.when(employeeService.getEmployeesByDepartment(2)).thenReturn(new ArrayList<>());
-        assertEquals(0, departmentService.getSalarySumByDepartment(2));
+        final List<Employee> employees = List.of(
+            new Employee("name1", (byte) 5, 15),
+            new Employee("name2", (byte) 2, 4380));
+        Mockito.when(employeeService.getEmployeesByDepartment(2)).thenReturn(List.of(employees.get(1)));
+        Mockito.when(employeeService.getEmployeesByDepartment(5)).thenReturn(List.of(employees.get(0)));
+        assertEquals(4380, departmentService.getSalarySumByDepartment(2));
+        assertEquals(15, departmentService.getSalarySumByDepartment(5));
     }
 
     @Test
@@ -57,8 +67,8 @@ public class DepartmentServiceTest {
             new Employee("name3", (byte) 1, 342));
         when(employeeService.getAllEmployees()).thenReturn(employees);
         Map<Integer, List<Employee>> expected = new HashMap<>();
-        expected.put(1, Arrays.asList(employees.get(1), employees.get(2)));
-        expected.put(3, Arrays.asList(employees.get(0)));
+        expected.put(1, List.of(employees.get(1), employees.get(2)));
+        expected.put(3, List.of(employees.get(0)));
         
         assertEquals(expected, departmentService.getAllEmployeesGrouped());
     }
