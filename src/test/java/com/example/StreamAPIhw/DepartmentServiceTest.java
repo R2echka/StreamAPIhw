@@ -29,7 +29,7 @@ public class DepartmentServiceTest {
     private DepartmentService departmentService;
 
     @Test
-    public void EmployeesByDepartment() {
+    public void employeesByDepartment() {
         final List<Employee> employees = List.of(
             new Employee("name1", (byte) 3, 93200),
             new Employee("name2", (byte) 3, 10),
@@ -41,7 +41,7 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    public void SalarySum() {
+    public void salarySum() {
         final List<Employee> employees = List.of(
             new Employee("name1", (byte) 5, 15),
             new Employee("name2", (byte) 2, 4380));
@@ -52,15 +52,18 @@ public class DepartmentServiceTest {
     }
 
     @Test
-    public void SalaryMinMax() {
-        Mockito.when(employeeService.minSalaryEmployee(4)).thenReturn(15);
+    public void salaryMinMax() {
+        final List<Employee> employees = List.of(
+            new Employee("name1", (byte) 5, 15),
+            new Employee("name2", (byte) 6, 43));
+        Mockito.when(employeeService.getEmployeesByDepartment(4)).thenReturn(List.of(employees.get(0)));
         assertEquals(15, departmentService.minSalaryEmployee(4));
-        Mockito.when(employeeService.maxSalaryEmployee(6)).thenReturn(43);
+        Mockito.when(employeeService.getEmployeesByDepartment(6)).thenReturn(List.of(employees.get(1)));
         assertEquals(43, departmentService.maxSalaryEmployee(6));
     }
 
     @Test
-    public void EmployeesGrouped() {
+    public void employeesGrouped() {
         final List<Employee> employees = List.of(
             new Employee("name1", (byte) 3, 15),
             new Employee("name2", (byte) 1, 38),

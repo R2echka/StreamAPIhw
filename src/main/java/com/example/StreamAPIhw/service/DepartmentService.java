@@ -26,16 +26,14 @@ public class DepartmentService {
     }
     
     public int maxSalaryEmployee(int department) {
-        return this.employeeService.employees.stream()
-        .filter(e -> e.getDepartment() == department)
-        .mapToInt(Employee::getSalary)
-        .max()
-        .orElseThrow();
+        return this.employeeService.getEmployeesByDepartment(department).stream()
+                .mapToInt(Employee::getSalary)
+                .max()
+                .orElseThrow();
     }
 
     public int minSalaryEmployee(int department) {
-        return this.employeeService.employees.stream()
-        .filter(e -> e.getDepartment() == department)
+        return this.getEmployeesByDepartment(department).stream()
         .mapToInt(Employee::getSalary)
         .min()
         .orElseThrow();
